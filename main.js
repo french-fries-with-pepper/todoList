@@ -33,6 +33,14 @@ inp.addEventListener("submit", (e) => {
   e.target.firstElementChild.value = "";
 });
 
+const archivedShowBtn = document.getElementById("toggleArchive");
+archivedShowBtn.addEventListener("change", () => {
+  console.log("ee");
+  toggleToDoView();
+});
+
+let isArchivedVisible = false;
+
 const render = (showArchived = false) => {
   // render allTodos in app
   app.innerHTML = "";
@@ -72,16 +80,16 @@ const addToDo = (todo) => {
   // add todo to all todos, then render
   if (!(todo.length === 0 || !todo.trim()))
     allToDos.push({ text: todo, done: false, archived: false, id: uuid() });
-  render();
+  render(isArchivedVisible);
 };
 
 const toggleToDo = (todoID) => {
   allToDos.map((el) => {
-    if (el.id == todoID) {
+    if (el.id == todoID && !el.archived) {
       el.done ? (el.done = false) : (el.done = true);
     }
   });
-  render();
+  render(isArchivedVisible);
 };
 
 const archiveToDo = (todoID) => {
@@ -91,14 +99,19 @@ const archiveToDo = (todoID) => {
       el.archived = true;
     }
   });
-  render();
+  render(isArchivedVisible);
+};
+
+const toggleToDoView = () => {
+  isArchivedVisible = !isArchivedVisible;
+  render(isArchivedVisible);
 };
 
 const backToActive = (todoID) => {
   // should move item to active
 };
 
-const removePermamently = (todoID) => {
+const removePermanently = (todoID) => {
   // ----------
 };
 
