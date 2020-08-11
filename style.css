@@ -20,9 +20,19 @@ body {
   color: var(--fg-main);
   background-color: var(--bg-main);
   font-size: 24px;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: min-content min-content 1fr min-content;
+  grid-template-areas:
+    "header header header header"
+    "input input input input"
+    ". main main ."
+    ". settings settings .";
 }
 
 .page_header {
+  grid-area: header;
   font-family: "IBM Plex Serif";
   text-align: center;
   font-weight: 700;
@@ -55,16 +65,21 @@ body {
 }
 
 #input {
+  grid-area: input;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 .list_wrap {
+  grid-area: main;
+  overflow-y: auto;
   margin: 2rem;
   list-style-type: none;
 }
 .todo_item {
   padding-left: 1.5rem;
+  margin-top: 1rem;
   position: relative;
   cursor: pointer;
   display: flex;
@@ -80,11 +95,14 @@ body {
   position: absolute;
   height: 100%;
   width: 1rem;
-  background-image: url(./icons/check_circle_outline-white-18dp.svg);
+  background-image: url(./icons/done-white-18dp.svg);
   background-repeat: no-repeat;
   background-position: center;
   top: 0;
   left: 0;
+}
+.delete_forever {
+  margin-right: 1.35rem;
 }
 .archived {
   color: var(--fg-secondary);
@@ -110,6 +128,10 @@ body {
 }
 
 .settings_wrap {
+  grid-area: settings;
+  height: 50px;
+  margin-left: 2rem;
+  margin-right: 2rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -181,4 +203,15 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+@media screen and (orientation: portrait) {
+  body {
+    font-size: 20px;
+    grid-template-areas:
+      "header header header header"
+      "input input input input"
+      "main main main main"
+      "settings settings settings settings";
+  }
 }

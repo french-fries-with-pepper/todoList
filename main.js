@@ -17,9 +17,16 @@ const allToDos = [
 
 const app = document.getElementById("todos");
 app.addEventListener("click", (el) => {
-  console.log(el);
   if (el.target.className === "close") {
     archiveToDo(el.target.parentElement.id);
+    return;
+  }
+  if (el.target.className === "delete_forever") {
+    removePermanently(el.target.parentElement.parentElement.id);
+    return;
+  }
+  if (el.target.className === "back_to_active") {
+    backToActive(el.target.parentElement.parentElement.id);
     return;
   }
   toggleToDo(el.target.id);
@@ -28,14 +35,13 @@ app.addEventListener("click", (el) => {
 const inp = document.getElementById("input");
 inp.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log(e.target.firstElementChild.value);
   addToDo(e.target.firstElementChild.value);
   e.target.firstElementChild.value = "";
 });
 
 const archivedShowBtn = document.getElementById("toggleArchive");
+archivedShowBtn.firstElementChild.checked = false;
 archivedShowBtn.addEventListener("change", () => {
-  console.log("ee");
   toggleToDoView();
 });
 
@@ -67,7 +73,9 @@ const render = (showArchived = false) => {
                   id="${el.id}"
                 >
                 ${el.text}
-                <img src="./icons/clear-white-18dp.svg" class="close">
+                <div>
+                <img src="./icons/delete_forever-white-18dp.svg" class="delete_forever"><img src="./icons/settings_backup_restore-white-18dp.svg" class="back_to_active">
+                </div>
                 </li>
                 `;
         app.innerHTML += res;
@@ -109,10 +117,22 @@ const toggleToDoView = () => {
 
 const backToActive = (todoID) => {
   // should move item to active
+  allToDos.map((el) => {
+    if (el.id === todoID) {
+      el.archived = false;
+    }
+  });
+  render(isArchivedVisible);
 };
 
 const removePermanently = (todoID) => {
   // ----------
+  allToDos.map((el, i) => {
+    if (el.id === todoID) {
+      allToDos.splice(i, 1);
+    }
+  });
+  render(isArchivedVisible);
 };
 
 render();
