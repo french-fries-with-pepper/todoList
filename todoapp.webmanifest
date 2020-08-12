@@ -1,0 +1,26 @@
+{
+  "name": "To do list PWA",
+  "short_name": "todoapp",
+  "description": "PWA for to do",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg"
+    },
+    {
+      "src": "favicon144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "theme_color": "#15232c",
+  "background_color": "#15232c"
+}
