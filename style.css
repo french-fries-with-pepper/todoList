@@ -98,7 +98,7 @@ body {
 .list_wrap {
   grid-area: main;
   overflow-y: auto;
-  margin: 2rem;
+  padding: 2rem;
   list-style-type: none;
 }
 .todo_item {
