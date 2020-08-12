@@ -6,14 +6,24 @@ const uuid = () =>
       (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
     ).toString(16)
   );
-const allToDos = [
+/* const allToDos = [
   { text: "first", done: false, archived: false, id: uuid() },
   { text: "second", done: true, archived: false, id: uuid() },
   { text: "dont know", done: false, archived: false, id: uuid() },
   { text: "ok", done: false, archived: true, id: uuid() },
   { text: "all Right", done: false, archived: false, id: uuid() },
   { text: "stay True", done: false, archived: false, id: uuid() },
-];
+]; */
+
+const loadState = () => {
+  // load current state from storage
+  return JSON.parse(localStorage.getItem("todos"));
+};
+const allToDos = loadState() || [];
+const saveState = () => {
+  // save current state to storage
+  localStorage.setItem("todos", JSON.stringify(allToDos));
+};
 
 const app = document.getElementById("todos");
 app.addEventListener("click", (el) => {
@@ -82,6 +92,7 @@ const render = (showArchived = false) => {
       }
     });
   }
+  saveState();
 };
 
 const addToDo = (todo) => {
