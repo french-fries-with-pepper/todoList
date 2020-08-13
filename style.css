@@ -16,22 +16,31 @@ select:focus {
   --bg-main: rgb(21, 35, 44);
   --fg-main: rgb(228, 195, 135);
   --fg-secondary: silver;
+  --neom-shadow: 7px 7px 14px #121d25, -7px -7px 14px #182933;
+  --neom-inset-shadow: inset 5px 5px 11px #121d25, inset -5px -5px 11px #182933;
+  --neom-radius: 1rem;
 }
 
 body {
   font-family: "IBM Plex Sans", sans-serif;
   color: var(--fg-main);
   background-color: var(--bg-main);
+  padding: 1rem;
   font-size: 24px;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: min-content min-content 1fr min-content;
   grid-template-areas:
-    "header header header header"
-    "input input input input"
+    ". header header ."
+    ". input input ."
     ". main main ."
     ". settings settings .";
+  grid-gap: 1rem;
+}
+.neom {
+  box-shadow: var(--neom-shadow);
+  border-radius: var(--neom-radius);
 }
 
 .page_header {
@@ -39,8 +48,8 @@ body {
   font-family: "IBM Plex Serif";
   text-align: center;
   font-weight: 700;
-  padding-top: 2rem;
-  padding-bottom: 3.2rem;
+  padding-top: 1rem;
+  padding-bottom: 1.2rem;
 }
 .think {
   position: relative;
@@ -71,8 +80,9 @@ body {
 
 #input {
   grid-area: input;
-
   display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -94,8 +104,11 @@ body {
   color: var(--fg-secondary);
 }
 .main_input:focus {
-  border: 2px solid var(--fg-main);
+  /*  border: 2px solid var(--fg-main); */
+  border-bottom: 1px solid var(--fg-main);
+
   border-radius: 1rem;
+  box-shadow: var(--neom-inset-shadow);
 }
 .main_input:focus::placeholder {
   color: var(--bg-main);
@@ -160,8 +173,10 @@ body {
 .settings_wrap {
   grid-area: settings;
   height: 50px;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -243,5 +258,8 @@ input:checked + .slider:before {
       "input input input input"
       "main main main main"
       "settings settings settings settings";
+  }
+  .main_input {
+    width: 13rem;
   }
 }
