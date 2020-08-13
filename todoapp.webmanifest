@@ -1,6 +1,6 @@
 {
-  "name": "To do list PWA",
-  "short_name": "todoapp",
+  "name": "To do list app",
+  "short_name": "ToDo",
   "description": "PWA for to do",
   "icons": [
     {
@@ -9,14 +9,20 @@
       "type": "image/svg"
     },
     {
-      "src": "favicon144.png",
-      "sizes": "144x144",
+      "src": "./icons/android-chrome-192x192.png",
+      "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "favicon512.png",
+      "src": "./icons/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "./icons/safari-pinned-tab.svg",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "start_url": "index.html",
