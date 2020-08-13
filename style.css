@@ -20,6 +20,16 @@ select:focus {
   --neom-inset-shadow: inset 5px 5px 11px #121d25, inset -5px -5px 11px #182933;
   --neom-radius: 1rem;
 }
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("./fonts/IBMPlexSans-Regular.ttf");
+  src: url("./fonts/IBMPlexSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("./fonts/IBMPlexSerif-Bold.ttf");
+}
 
 body {
   font-family: "IBM Plex Sans", sans-serif;
@@ -119,7 +129,6 @@ body {
   list-style-type: none;
 }
 .todo_item {
-  padding-left: 1.5rem;
   margin-top: 1rem;
   position: relative;
   cursor: pointer;
@@ -130,6 +139,7 @@ body {
 }
 .done {
   text-decoration: line-through;
+  padding-left: 1.5rem;
 }
 .done::before {
   content: " ";
@@ -147,6 +157,9 @@ body {
 }
 .archived {
   color: var(--fg-secondary);
+}
+.archived.done {
+  padding-left: 0;
 }
 .archived.done::before {
   display: none;
