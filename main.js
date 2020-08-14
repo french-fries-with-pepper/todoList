@@ -68,7 +68,7 @@ const render = (showArchived = false) => {
               id="${el.id}"
             >
             ${el.text}
-            <img src="./icons/clear-white-18dp.svg" class="close">
+            <img src="./icons/clear-white-18dp.svg" class="close" width=18 height=18>
             </li>
             `;
       app.innerHTML += res;
@@ -83,7 +83,7 @@ const render = (showArchived = false) => {
                   id="${el.id}"
                 >
                 ${el.text}
-                <div>
+                <div class="todo_item__icon_container">
                 <img src="./icons/delete_forever-white-18dp.svg" class="delete_forever"><img src="./icons/settings_backup_restore-white-18dp.svg" class="back_to_active">
                 </div>
                 </li>

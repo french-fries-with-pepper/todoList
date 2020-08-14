@@ -137,6 +137,11 @@ body {
   align-items: center;
   justify-content: space-between;
 }
+.todo_item__icon_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .done {
   text-decoration: line-through;
   padding-left: 1.5rem;
@@ -163,6 +168,9 @@ body {
 }
 .archived.done::before {
   display: none;
+}
+.close {
+  margin-left: 0.5rem;
 }
 
 .submit_btn {
@@ -272,5 +280,10 @@ input:checked + .slider:before {
   }
   .main_input {
     width: 13rem;
+  }
+}
+@media screen and (max-width: 373px) {
+  body {
+    font-size: 16px;
   }
 }
