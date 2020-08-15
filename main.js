@@ -6,33 +6,72 @@ const uuid = () =>
       (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
     ).toString(16)
   );
-const loadState = () => {
-  // load current state from storage
-  return JSON.parse(localStorage.getItem("todos"));
-};
+const loadState = () => JSON.parse(localStorage.getItem("todos"));
+const loadTheme = () => JSON.parse(localStorage.getItem("theme"));
 const allToDos = loadState() || [];
-const saveState = () => {
-  // save current state to storage
-  localStorage.setItem("todos", JSON.stringify(allToDos));
+let currentTheme = loadTheme() || "light";
+const saveState = () => localStorage.setItem("todos", JSON.stringify(allToDos));
+const saveTheme = () => localStorage.setItem("theme", JSON.stringify(currentTheme));
+
+
+const darkTheme = {
+  "--bg-main": "rgb(21, 35, 44)",
+  "--fg-main": "rgb(228, 195, 135)",
+  "--fg-secondary": "silver",
+  "--neom-shadow": "7px 7px 14px #121d25, -7px -7px 14px #182933",
+  "--neom-inset-shadow":
+    "inset 5px 5px 11px #121d25, inset -5px -5px 11px #182933",
+  "--done-icon": " url(./icons/done-white-18dp.svg)",
+};
+const lightTheme = {
+  "--bg-main": "#bed3e2",
+  "--fg-main": "#2f4c5e",
+  "--fg-secondary": "#676c71",
+  "--neom-shadow": "7px 7px 14px #a2b3c0, -7px -7px 14px #dbf3ff",
+  "--neom-inset-shadow":
+    "inset 5px 5px 11px #a2b3c0, inset -5px -5px 11px #dbf3ff",
+  "--done-icon": " url(./icons/done-dark-18dp.svg)",
 };
 
+const useTheme = (theme) => {
+  const root = document.documentElement;
+  for (let key in theme) {
+    root.style.setProperty(key, theme[key]);
+  }
+};
+
+const toggleTheme = () => {
+  if (currentTheme === "light") {
+    currentTheme = "dark";
+    useTheme(darkTheme);
+    saveTheme();
+  } else {
+    currentTheme = "light";
+    useTheme(lightTheme);
+    saveTheme();
+  }
+}
+// fix that crap!!!!
 const app = document.getElementById("todos");
 app.addEventListener("click", (el) => {
   if (el.target.dataset.role === "close") {
-    archiveToDo(el.target.parentElement.id);
+    if (el.target.parentElement) archiveToDo(el.target.parentElement.id);
+    if (el.target.parentElement.parentElement) archiveToDo(el.target.parentElement.parentElement.id);
     return;
   }
   if (el.target.dataset.role === "delete_forever") {
-    removePermanently(el.target.parentElement.parentElement.id);
+    if (el.target.parentElement.parentElement) removePermanently(el.target.parentElement.parentElement.id);
+    if (el.target.parentElement.parentElement.parentElement) removePermanently(el.target.parentElement.parentElement.parentElement.id);
     return;
   }
   if (el.target.dataset.role === "back_to_active") {
-    backToActive(el.target.parentElement.parentElement.id);
+    if (el.target.parentElement.parentElement) backToActive(el.target.parentElement.parentElement.id);
+    if (el.target.parentElement.parentElement.parentElement) backToActive(el.target.parentElement.parentElement.parentElement.id);
     return;
   }
-  console.log(el.target.className)
-  if(el.target.className==="todo_item__text"){
-  toggleToDo(el.target.parentElement.id);}
+  if (el.target.className === "todo_item__text") {
+    toggleToDo(el.target.parentElement.id);
+  }
 });
 
 const inp = document.getElementById("input");
@@ -48,6 +87,9 @@ archivedShowBtn.addEventListener("change", () => {
   toggleToDoView();
 });
 
+const toggleThemeBtn = document.getElementById("theme_icon");
+toggleThemeBtn.addEventListener("click", () => { toggleTheme() });
+
 let isArchivedVisible = false;
 const render = (showArchived = false) => {
   // render allTodos in app
@@ -60,8 +102,8 @@ const render = (showArchived = false) => {
               id="${el.id}"
             >
             <span class="todo_item__text">${el.text}</span>
-            <svg class="svg_icon svg_icon__close" data-role="close" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
-            	<use xlink:href="#img-clear-white-18dp"></use>
+            <svg data-role="close" class="svg_icon svg_icon__close" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
+            	<use data-role="close" xlink:href="#img-clear-white-18dp"></use>
             </svg>
             </li>
             `;
@@ -79,9 +121,9 @@ const render = (showArchived = false) => {
                 <span class="todo_item__text">${el.text}</span>
                 <div class="todo_item__icon_container">
                 <svg class="svg_icon" data-role="delete_forever" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
-            	<use xlink:href="#img-delete-forever-white-18dp"></use>
+            	<use data-role="delete_forever" xlink:href="#img-delete-forever-white-18dp"></use>
             </svg><svg class="svg_icon svg_icon__back" data-role="back_to_active" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
-            <use xlink:href="#img-settings-backup-restore-white-18dp"></use>
+            <use data-role="back_to_active" xlink:href="#img-settings-backup-restore-white-18dp"></use>
           </svg>
                 </div>
                 </li>
@@ -144,6 +186,8 @@ const removePermanently = (todoID) => {
   render(isArchivedVisible);
 };
 
+
+currentTheme === "light" ? useTheme(lightTheme) : useTheme(darkTheme);
 render();
 
 /* service worker part */

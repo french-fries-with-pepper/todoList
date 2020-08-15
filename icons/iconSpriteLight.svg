@@ -1,0 +1,22 @@
+<svg display="none">
+	<defs>
+		<g id="img-add-circle-white-18dp">
+			<path xmlns="http://www.w3.org/2000/svg" fill="none" d="M0 0h24v24H0z"/><path xmlns="http://www.w3.org/2000/svg" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+		</g>
+		<g id="img-clear-white-18dp">
+			<path xmlns="http://www.w3.org/2000/svg" fill="none" d="M0 0h24v24H0z"/><path xmlns="http://www.w3.org/2000/svg" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+		</g>
+		<g id="img-delete-forever-white-18dp">
+			<path xmlns="http://www.w3.org/2000/svg" fill="none" d="M0 0h24v24H0z"/><path xmlns="http://www.w3.org/2000/svg" fill="none" d="M0 0h24v24H0V0z"/><path xmlns="http://www.w3.org/2000/svg" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/>
+		</g>
+		<g id="img-done-white-18dp">
+			<path xmlns="http://www.w3.org/2000/svg" fill="none" d="M0 0h24v24H0z"/><path xmlns="http://www.w3.org/2000/svg" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+		</g>
+		<g id="img-settings-backup-restore-white-18dp">
+			<path xmlns="http://www.w3.org/2000/svg" fill="none" d="M0 0h24v24H0z"/><path xmlns="http://www.w3.org/2000/svg" d="M14 12c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2zm-2-9c-4.97 0-9 4.03-9 9H0l4 4 4-4H5c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.51 0-2.91-.49-4.06-1.3l-1.42 1.44C8.04 20.3 9.94 21 12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+		</g>
+		<g id="img-brightness-6-black-18dp">
+			<path d="M0 0h24v24H0z" fill="none"/><path d="M20 15.31L23.31 12 20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69zM12 18V6c3.31 0 6 2.69 6 6s-2.69 6-6 6z"/>
+		</g>
+	</defs>
+</svg>

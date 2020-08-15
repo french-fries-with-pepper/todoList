@@ -20,6 +20,7 @@ var urlsToCache = [
   "icons/clear-white-18dp.svg",
   "icons/delete_forever-white-18dp.svg",
   "icons/done-white-18dp.svg",
+  "icons/done-dark-18dp.svg"
 ];
 self.addEventListener("install", function (event) {
   event.waitUntil(
