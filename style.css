@@ -142,6 +142,10 @@ body {
   flex-direction: row;
   align-items: center;
 }
+.todo_item__text{
+  display: block;
+  width: calc(100% - 1rem);
+}
 .done {
   text-decoration: line-through;
   padding-left: 1.5rem;
@@ -177,10 +181,13 @@ body {
   border: none;
   background-color: inherit;
   color: var(--fg-main);
-  background-image: url(./icons/add_circle-white-18dp.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
+  width: 2rem;
+  height: 2rem;
+}
+.svg_icon__submit{
   width: 2rem;
   height: 2rem;
 }
@@ -286,4 +293,14 @@ input:checked + .slider:before {
   body {
     font-size: 16px;
   }
+}
+.svg_icon{
+  fill: var(--fg-main);
+}
+.svg_icon__back{
+  margin-left: .5rem;
+}
+.svg_icon__close{
+  min-width: 24px;
+  padding-left: .5rem;
 }

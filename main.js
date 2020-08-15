@@ -6,15 +6,6 @@ const uuid = () =>
       (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
     ).toString(16)
   );
-/* const allToDos = [
-  { text: "first", done: false, archived: false, id: uuid() },
-  { text: "second", done: true, archived: false, id: uuid() },
-  { text: "dont know", done: false, archived: false, id: uuid() },
-  { text: "ok", done: false, archived: true, id: uuid() },
-  { text: "all Right", done: false, archived: false, id: uuid() },
-  { text: "stay True", done: false, archived: false, id: uuid() },
-]; */
-
 const loadState = () => {
   // load current state from storage
   return JSON.parse(localStorage.getItem("todos"));
@@ -27,19 +18,21 @@ const saveState = () => {
 
 const app = document.getElementById("todos");
 app.addEventListener("click", (el) => {
-  if (el.target.className === "close") {
+  if (el.target.dataset.role === "close") {
     archiveToDo(el.target.parentElement.id);
     return;
   }
-  if (el.target.className === "delete_forever") {
+  if (el.target.dataset.role === "delete_forever") {
     removePermanently(el.target.parentElement.parentElement.id);
     return;
   }
-  if (el.target.className === "back_to_active") {
+  if (el.target.dataset.role === "back_to_active") {
     backToActive(el.target.parentElement.parentElement.id);
     return;
   }
-  toggleToDo(el.target.id);
+  console.log(el.target.className)
+  if(el.target.className==="todo_item__text"){
+  toggleToDo(el.target.parentElement.id);}
 });
 
 const inp = document.getElementById("input");
@@ -56,7 +49,6 @@ archivedShowBtn.addEventListener("change", () => {
 });
 
 let isArchivedVisible = false;
-
 const render = (showArchived = false) => {
   // render allTodos in app
   app.innerHTML = "";
@@ -67,8 +59,10 @@ const render = (showArchived = false) => {
               class="todo_item  ${el.done ? "done" : "not_done"}"
               id="${el.id}"
             >
-            ${el.text}
-            <img src="./icons/clear-white-18dp.svg" class="close" width=18 height=18>
+            <span class="todo_item__text">${el.text}</span>
+            <svg class="svg_icon svg_icon__close" data-role="close" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
+            	<use xlink:href="#img-clear-white-18dp"></use>
+            </svg>
             </li>
             `;
       app.innerHTML += res;
@@ -82,9 +76,13 @@ const render = (showArchived = false) => {
                   class="todo_item archived ${el.done ? "done" : "not_done"}"
                   id="${el.id}"
                 >
-                ${el.text}
+                <span class="todo_item__text">${el.text}</span>
                 <div class="todo_item__icon_container">
-                <img src="./icons/delete_forever-white-18dp.svg" class="delete_forever"><img src="./icons/settings_backup_restore-white-18dp.svg" class="back_to_active">
+                <svg class="svg_icon" data-role="delete_forever" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
+            	<use xlink:href="#img-delete-forever-white-18dp"></use>
+            </svg><svg class="svg_icon svg_icon__back" data-role="back_to_active" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
+            <use xlink:href="#img-settings-backup-restore-white-18dp"></use>
+          </svg>
                 </div>
                 </li>
                 `;
