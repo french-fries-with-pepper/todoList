@@ -51,27 +51,34 @@ const toggleTheme = () => {
     saveTheme();
   }
 }
-// fix that crap!!!!
+const findParentId = (el) => {
+  res = el.target;
+  while (true) {
+    res = res.parentElement;
+    if (res.id) return res.id;
+    if (!res) return null;
+  }
+}
+
 const app = document.getElementById("todos");
 app.addEventListener("click", (el) => {
-  if (el.target.dataset.role === "close") {
-    if (el.target.parentElement) archiveToDo(el.target.parentElement.id);
-    if (el.target.parentElement.parentElement) archiveToDo(el.target.parentElement.parentElement.id);
-    return;
+  switch (el.target.dataset.role) {
+    case "close":
+      archiveToDo(findParentId(el));
+      break;
+    case "delete_forever":
+      removePermanently(findParentId(el));
+      break;
+    case "back_to_active":
+      backToActive(findParentId(el));
+      break;
+    case "toggle_todo":
+      toggleToDo(findParentId(el));
+      break;
+    default:
+      break;
   }
-  if (el.target.dataset.role === "delete_forever") {
-    if (el.target.parentElement.parentElement) removePermanently(el.target.parentElement.parentElement.id);
-    if (el.target.parentElement.parentElement.parentElement) removePermanently(el.target.parentElement.parentElement.parentElement.id);
-    return;
-  }
-  if (el.target.dataset.role === "back_to_active") {
-    if (el.target.parentElement.parentElement) backToActive(el.target.parentElement.parentElement.id);
-    if (el.target.parentElement.parentElement.parentElement) backToActive(el.target.parentElement.parentElement.parentElement.id);
-    return;
-  }
-  if (el.target.className === "todo_item__text") {
-    toggleToDo(el.target.parentElement.id);
-  }
+  return;
 });
 
 const inp = document.getElementById("input");
@@ -101,7 +108,7 @@ const render = (showArchived = false) => {
               class="todo_item  ${el.done ? "done" : "not_done"}"
               id="${el.id}"
             >
-            <span class="todo_item__text">${el.text}</span>
+            <span data-role="toggle_todo" class="todo_item__text">${el.text}</span>
             <svg data-role="close" class="svg_icon svg_icon__close" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin">
             	<use data-role="close" xlink:href="#img-clear-white-18dp"></use>
             </svg>
@@ -144,7 +151,7 @@ const addToDo = (todo) => {
 
 const toggleToDo = (todoID) => {
   allToDos.map((el) => {
-    if (el.id == todoID && !el.archived) {
+    if (el.id === todoID && !el.archived) {
       el.done ? (el.done = false) : (el.done = true);
     }
   });
