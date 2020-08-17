@@ -150,6 +150,7 @@ const addToDo = (todo) => {
 };
 
 const toggleToDo = (todoID) => {
+  if(!todoID)return;
   allToDos.map((el) => {
     if (el.id === todoID && !el.archived) {
       el.done ? (el.done = false) : (el.done = true);
@@ -160,6 +161,7 @@ const toggleToDo = (todoID) => {
 
 const archiveToDo = (todoID) => {
   // makeToDo archived
+  if(!todoID)return;
   allToDos.map((el) => {
     if (el.id === todoID) {
       el.archived = true;
@@ -175,6 +177,7 @@ const toggleToDoView = () => {
 
 const backToActive = (todoID) => {
   // should move item to active
+  if(!todoID)return;
   allToDos.map((el) => {
     if (el.id === todoID) {
       el.archived = false;
@@ -185,6 +188,7 @@ const backToActive = (todoID) => {
 
 const removePermanently = (todoID) => {
   // ----------
+  if(!todoID)return;
   allToDos.map((el, i) => {
     if (el.id === todoID) {
       allToDos.splice(i, 1);

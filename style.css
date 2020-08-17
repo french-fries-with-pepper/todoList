@@ -103,7 +103,6 @@ body {
   width: 15rem;
   border: none;
   border-bottom: 2px solid var(--fg-main);
-  transition: all 0.2s ease-in;
   color: var(--fg-main);
   font-size: 1rem;
   line-height: 2rem;
@@ -118,6 +117,7 @@ body {
   border-bottom: 1px solid var(--fg-main);
   border-radius: 1rem;
   box-shadow: var(--neom-inset-shadow);
+  transition: all 0.2s ease-in;
 }
 .main_input:focus::placeholder {
   color: var(--bg-main);
@@ -239,7 +239,6 @@ body {
   right: 0;
   bottom: 0;
   background-color: var(--fg-secondary);
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -251,7 +250,6 @@ body {
   left: 2px;
   bottom: 2px;
   background-color: var(--bg-main);
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -264,8 +262,6 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(13px);
-  -ms-transform: translateX(13px);
   transform: translateX(13px);
 }
 
