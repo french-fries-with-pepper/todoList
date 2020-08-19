@@ -52,17 +52,15 @@ const toggleTheme = () => {
   }
 }
 const findParentId = (el) => {
-  res = el.target;
-  while (true) {
-    res = res.parentElement;
-    if (res.id) return res.id;
-    if (!res) return null;
-  }
+    if (el.id) return el.id;
+    if (!el) return null;
+    return findParentId(el.parentElement);
 }
 
 const app = document.getElementById("todos");
-app.addEventListener("click", (el) => {
-  switch (el.target.dataset.role) {
+app.addEventListener("click", (ev) => {
+  const el=ev.target;
+  switch (el.dataset.role) {
     case "close":
       archiveToDo(findParentId(el));
       break;
